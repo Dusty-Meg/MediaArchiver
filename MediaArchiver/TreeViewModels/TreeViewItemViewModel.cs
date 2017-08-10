@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace TreeViewWithViewModelDemo.LoadOnDemand
+namespace MediaArchiver.TreeViewModels
 {
     /// <summary>
     /// Base class for all ViewModel classes displayed by TreeViewItems.  

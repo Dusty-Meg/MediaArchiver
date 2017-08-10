@@ -1,6 +1,6 @@
-using TreeViewWithViewModelDemo.LoadOnDemand;
+using MediaArchiver.DataModels;
 
-namespace MediaArchiver
+namespace MediaArchiver.TreeViewModels
 {
     public class FileViewModel : TreeViewItemViewModel
     {

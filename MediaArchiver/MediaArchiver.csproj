@@ -55,15 +55,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BaseDirectoryLayout.cs" />
-    <Compile Include="BaseDirectoryViewModel.cs" />
-    <Compile Include="DirectoryLayout.cs" />
-    <Compile Include="DirectoryViewModel.cs" />
-    <Compile Include="FileInfo.cs" />
-    <Compile Include="FileViewModel.cs" />
-    <Compile Include="FolderInfo.cs" />
-    <Compile Include="TopDirectoryViewModel.cs" />
-    <Compile Include="TreeViewItemViewModel.cs" />
+    <Compile Include="DataModels\BaseDirectoryLayout.cs" />
+    <Compile Include="TreeViewModels\BaseDirectoryViewModel.cs" />
+    <Compile Include="DataModels\DirectoryLayout.cs" />
+    <Compile Include="TreeViewModels\DirectoryViewModel.cs" />
+    <Compile Include="DataModels\FileInfo.cs" />
+    <Compile Include="TreeViewModels\FileViewModel.cs" />
+    <Compile Include="DataModels\FolderInfo.cs" />
+    <Compile Include="TreeViewModels\TopDirectoryViewModel.cs" />
+    <Compile Include="TreeViewModels\TreeViewItemViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

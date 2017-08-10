@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MediaArchiver
+namespace MediaArchiver.DataModels
 {
     public class BaseDirectoryLayout
     {

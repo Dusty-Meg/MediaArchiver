@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -14,6 +15,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MediaArchiver.DataModels;
+using MediaArchiver.TreeViewModels;
+using FileInfo = MediaArchiver.DataModels.FileInfo;
 
 namespace MediaArchiver
 {
@@ -76,13 +80,81 @@ namespace MediaArchiver
 
             FileViewModel fileViewModel = button?.DataContext as FileViewModel;
 
+            CheckFileViewModel(fileViewModel);
+        }
+
+        private void btnArchiveSeason_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+
+            DirectoryViewModel directoryViewModel = button?.DataContext as DirectoryViewModel;
+
+            CheckDirectoryViewModel(directoryViewModel);
+        }
+
+        private void btnArchiveSeries_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+
+            BaseDirectoryViewModel baseDirectoryLayout = button?.DataContext as BaseDirectoryViewModel;
+
+            CheckBaseDirectoryViewModel(baseDirectoryLayout);
+        }
+
+        private void CheckBaseDirectoryViewModel(BaseDirectoryViewModel directoryViewModel)
+        {
+            if (directoryViewModel != null)
+            {
+                CheckChildren(directoryViewModel.Children, directoryViewModel.IsDirectoryArchived);
+            }
+        }
+
+        private void CheckDirectoryViewModel(DirectoryViewModel directoryViewModel, bool? archive = null)
+        {
+            if (directoryViewModel != null)
+            {
+                CheckChildren(directoryViewModel.Children, archive ?? directoryViewModel.IsDirectoryArchived);
+            }
+        }
+
+        private void CheckChildren(ObservableCollection<TreeViewItemViewModel> children, bool archive)
+        {
+            foreach (TreeViewItemViewModel treeViewItemViewModel in children)
+            {
+                FileViewModel fileViewModels = treeViewItemViewModel as FileViewModel;
+
+                if (fileViewModels != null)
+                {
+                    CheckFileViewModel(fileViewModels, archive);
+
+                    continue;
+                }
+
+                DirectoryViewModel directoryViewModels = treeViewItemViewModel as DirectoryViewModel;
+
+                if (directoryViewModels != null)
+                {
+                    CheckDirectoryViewModel(directoryViewModels, archive);
+
+                    continue;
+                }
+            }
+        }
+
+        private void CheckFileViewModel(FileViewModel fileViewModel, bool? archive = null)
+        {
             if (fileViewModel != null)
             {
-                if (fileViewModel.IsArchived)
+                if (archive == null)
+                { 
+                    archive = fileViewModel.IsArchived;
+                }
+
+                if (fileViewModel.IsArchived && archive.Value)
                 {
                     UnArchiveFile(fileViewModel.FilePath);
                 }
-                else
+                else if (!fileViewModel.IsArchived && !archive.Value)
                 {
                     ArchiveFile(fileViewModel.FilePath);
                 }

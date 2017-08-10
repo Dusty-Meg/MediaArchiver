@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaArchiver"
+        xmlns:treeViewModels="clr-namespace:MediaArchiver.TreeViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="1000" Width="1000">
     <Grid Width="1000" Height="1000">
@@ -46,22 +47,9 @@
                 </Style>
             </TreeView.ItemContainerStyle>
             <TreeView.Resources>
-                <HierarchicalDataTemplate 
+                <HierarchicalDataTemplate
 
-                    DataType="{x:Type local:TopDirectoryViewModel}" 
-
-                    ItemsSource="{Binding Children}"
-
-                >
-                    <StackPanel Orientation="Horizontal">
-                        <Image Width="16" Height="16"/>
-                        <TextBlock Text="{Binding DirectoryName}" />
-                    </StackPanel>
-                </HierarchicalDataTemplate>
-
-                <HierarchicalDataTemplate 
-
-                    DataType="{x:Type local:BaseDirectoryViewModel}" 
+                    DataType="{x:Type treeViewModels:TopDirectoryViewModel}" 
 
                     ItemsSource="{Binding Children}"
 
@@ -74,22 +62,36 @@
 
                 <HierarchicalDataTemplate 
 
-                    DataType="{x:Type local:DirectoryViewModel}" 
+                    DataType="{x:Type treeViewModels:BaseDirectoryViewModel}" 
 
                     ItemsSource="{Binding Children}"
 
                 >
                     <StackPanel Orientation="Horizontal">
                         <Image Width="16" Height="16"/>
-                        <TextBlock Text="{Binding DirectoryName}" />
+                        <TextBlock Text="{Binding DirectoryName}" Padding="0,0,5,0"/>
+                        <Button Content="{Binding FileArchiveButtonText}" Click="btnArchiveSeries_Click"></Button>
                     </StackPanel>
                 </HierarchicalDataTemplate>
 
-                <DataTemplate DataType="{x:Type local:FileViewModel}">
+                <HierarchicalDataTemplate 
+
+                    DataType="{x:Type treeViewModels:DirectoryViewModel}" 
+
+                    ItemsSource="{Binding Children}"
+
+                >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="16" Height="16"/>
+                        <TextBlock Text="{Binding DirectoryName}" Padding="0,0,5,0"/>
+                        <Button Content="{Binding FileArchiveButtonText}" Click="btnArchiveSeason_Click"></Button>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+
+                <DataTemplate DataType="{x:Type treeViewModels:FileViewModel}">
                     <StackPanel Orientation="Horizontal">
                         <Image Width="16" Height="16" />
-                        <TextBlock Text="{Binding FilePath}" />
-                        <TextBlock Text="{Binding FileArchived}" Padding="5,0,5,0" ></TextBlock>
+                        <TextBlock Text="{Binding FilePath}" Padding="0,0,5,0"/>
                         <Button Content="{Binding FileArchiveButtonText}" Click="btnArchiveFile_Click"></Button>
                     </StackPanel>
                 </DataTemplate>

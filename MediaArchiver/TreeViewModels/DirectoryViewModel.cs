@@ -1,6 +1,7 @@
-﻿using TreeViewWithViewModelDemo.LoadOnDemand;
+﻿using System.Linq;
+using MediaArchiver.DataModels;
 
-namespace MediaArchiver
+namespace MediaArchiver.TreeViewModels
 {
     public class DirectoryViewModel : TreeViewItemViewModel
     {
@@ -32,6 +33,22 @@ namespace MediaArchiver
             {
                 Children.Add(new FileViewModel(directoryLayoutFile, this));
             }
+        }
+
+        public bool IsDirectoryArchived
+        {
+            get
+            {
+                bool directoryChildrenArchived = _directoryLayout.Folders.All(x => x.IsDirectoryArchived);
+                bool fileChildrenArchived = _directoryLayout.Files.All(x => x.IsArchived);
+
+                return directoryChildrenArchived && fileChildrenArchived;
+            }
+        }
+
+        public string FileArchiveButtonText
+        {
+            get { return IsDirectoryArchived ? "Un-Archive Season" : "Archive Season"; }
         }
     }
 }

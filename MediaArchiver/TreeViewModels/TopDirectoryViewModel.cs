@@ -1,7 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using MediaArchiver.DataModels;
 
-namespace MediaArchiver
+namespace MediaArchiver.TreeViewModels
 {
     public class TopDirectoryViewModel
     {

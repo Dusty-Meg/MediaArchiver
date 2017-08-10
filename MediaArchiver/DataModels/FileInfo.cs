@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace MediaArchiver
+namespace MediaArchiver.DataModels
 {
     public class FileInfo
     {
